@@ -1,6 +1,9 @@
 import pygame
-from dino_runner.utils.constants import RUNNING,DUCKING,JUMPING
+from dino_runner.utils.constants import RUNNING,RUNNING_SHIELD ,DUCKING, DUCKING_SHIELD,JUMPING,SHIELD_TYPE, DEFAULT_TYPE
 from pygame.sprite import Sprite
+
+RUN_IMG = {DEFAULT_TYPE: RUNNING, SHIELD_TYPE: RUNNING_SHIELD}
+DUCK_IMG = {DEFAULT_TYPE: DUCKING, SHIELD_TYPE: DUCKING_SHIELD}
 
 class Dinosaur():
     X_POS = 80
@@ -9,7 +12,8 @@ class Dinosaur():
     JUMP_VEL = 8.5
 
     def __init__(self):
-        self.image = RUNNING[0]
+        self.type = DEFAULT_TYPE    
+        self.image = RUN_IMG[self.type][0]
         self.dino_rect = self.image.get_rect()
         self.dino_rect.x = self.X_POS
         self.dino_rect.y = self.Y_POS
@@ -44,7 +48,7 @@ class Dinosaur():
             self.dino_duck = False
             self.dino_jump = False
         
-        if self.step_index <=10:
+        if self.step_index >=9:
             self.step_index = 0
 
 
@@ -60,14 +64,14 @@ class Dinosaur():
             self.jump_vel = self.JUMP_VEL
         
     def duck(self):
-        self.image = DUCKING[0] if self.step_index <5 else DUCKING[1]
+        self.image = DUCK_IMG[self.type][self.step_index // 5]
         self.dino_rect = self.image.get_rect()
         self.dino_rect.x = self.X_POS   
         self.dino_rect.y = self.Y_POS_DUCK
         self.step_index +=1
 
     def run(self):
-        self.image = RUNNING[0] if self.step_index <5 else RUNNING[1]
+        self.image = RUN_IMG[self.type][self.step_index // 5]
         self.dino_rect = self.image.get_rect()
         self.dino_rect.x = self.X_POS   
         self.dino_rect.y = self.Y_POS
