@@ -18,4 +18,4 @@ class PlayerHeartManager:
             x_position = x_position + 30
 
     def reset_hearts(self):
-        self.heart_count = HEART_COUNT
+        self.heart_count = 4

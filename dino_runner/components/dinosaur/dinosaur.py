@@ -1,5 +1,5 @@
 import pygame
-from dino_runner.utils.constants import RUNNING,RUNNING_SHIELD ,DUCKING, DUCKING_SHIELD,JUMPING,SHIELD_TYPE, DEFAULT_TYPE
+from dino_runner.utils.constants import RUNNING,RUNNING_SHIELD ,DUCKING, DUCKING_SHIELD,JUMPING,SHIELD_TYPE, DEFAULT_TYPE,JUMPING_SHIELD
 from pygame.sprite import Sprite
 
 RUN_IMG = {DEFAULT_TYPE: RUNNING, SHIELD_TYPE: RUNNING_SHIELD}
@@ -24,6 +24,14 @@ class Dinosaur():
         self.dino_jump = False
 
         self.jump_vel = self.JUMP_VEL
+
+        self.setup_state_booleans()
+
+    def setup_state_booleans(self):
+        self.has_powerup=False
+        self.shield = False
+        self.show_text = False
+        self.shield_time_up = 0
 
     def update(self, user_input):
         if self.dino_jump:
@@ -82,4 +90,24 @@ class Dinosaur():
 
     def draw(self,screen):
         screen.blit(self.image,(self.dino_rect.x,self.dino_rect.y))
-   
+    
+
+    def check_invisivility(self,screen):
+        if self.shield:
+            time_to_show = round((self.shield_time_up - pygame.time.get_ticks())/100,2)
+            if time_to_show >=0:
+                if self.show_text:
+                    fond = pygame.font.Font('Freesansbold.ttf',18)
+                    text = fond.render(f'Shield enable for {time_to_show}',True,(0,0,0))
+                    textRect = text.get_rect()
+                    textRect.center = (500,40)
+                    screen.blit(text,textRect)
+            
+            else:
+                self.shield = False
+                self.update_to_default(SHIELD_TYPE)
+    
+    def update_to_default(self,current_type):
+        if self.type == current_type:
+            self.type = DEFAULT_TYPE
+
