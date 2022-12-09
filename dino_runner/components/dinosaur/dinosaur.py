@@ -99,7 +99,7 @@ class Dinosaur():
             time_to_show = round((self.shield_time_up - pygame.time.get_ticks())/100,2)
             if time_to_show >=0:
                 if self.show_text:
-                    fond = pygame.font.Font('Freesansbold.ttf',18)
+                    fond = pygame.font.Font('freesansbold.ttf',18)
                     text = fond.render(f'Shield enable for {time_to_show}',True,(0,0,0))
                     textRect = text.get_rect()
                     textRect.center = (500,40)
