@@ -3,6 +3,7 @@ from dino_runner.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, F
 from dino_runner.components.dinosaur.dinosaur import Dinosaur
 from dino_runner.components.obstacle.obstacleManager import ObstacleManager
 from dino_runner.components.score_menu.text_utils import *
+from dino_runner.components.cloud import Cloud
 from dino_runner.components.player_hearts.player_heart_manager import PlayerHeartManager
 from dino_runner.components.powerup.powerupmanager import PowerUpManager
 
@@ -28,6 +29,7 @@ class Game:
         self.show_text = False
 
         self.power_up_manager = PowerUpManager()
+        self.clouds = Cloud()
 
     def run(self):
         self.obstacle_manager.reset_obstacle(self)
@@ -51,6 +53,7 @@ class Game:
         self.player.update(user_input)
         self.obstacle_manager.update(self)
         self.power_up_manager.update(self.points,self.game_speed,self.player)
+        self.clouds.update(self)
 
     def draw(self):
         self.clock.tick(FPS)
@@ -61,6 +64,7 @@ class Game:
         self.score()
         self.player_heart_manager.draw(self.screen)
         self.power_up_manager.draw(self.screen)
+        self.clouds.draw(self.screen)
         pygame.display.update()
         pygame.display.flip()
 
