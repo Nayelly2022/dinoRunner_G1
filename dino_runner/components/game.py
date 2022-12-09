@@ -1,5 +1,5 @@
 import pygame
-from dino_runner.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, FPS, TITLE, DEFAULT_TYPE
+from dino_runner.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, FPS, TITLE, DEFAULT_TYPE,BACKGROUND_SOUND
 from dino_runner.components.dinosaur.dinosaur import Dinosaur
 from dino_runner.components.obstacle.obstacleManager import ObstacleManager
 from dino_runner.components.score_menu.text_utils import *
@@ -36,6 +36,7 @@ class Game:
         self.player_heart_manager.reset_hearts()
         self.power_up_manager.reset_power_ups(self.points)
         self.playing = True
+        BACKGROUND_SOUND.play(-1)
         while self.playing:
             self.events()
             self.update()

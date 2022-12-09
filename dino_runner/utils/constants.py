@@ -1,5 +1,6 @@
 import pygame
 import os
+pygame.mixer.init()
 
 # Global Constants
 TITLE = "Chrome Dino Runner"
@@ -72,3 +73,6 @@ HEART_COUNT = 4
 
 DEFAULT_TYPE = "default"
 SHIELD_TYPE = 'shield'
+
+JUMP_SOUND = pygame.mixer.Sound(os.path.join(IMG_DIR, 'Sounds/JUMP.wav'))
+BACKGROUND_SOUND = pygame.mixer.Sound(os.path.join(IMG_DIR, 'Sounds/BACKGROUNDSOUND.wav'))

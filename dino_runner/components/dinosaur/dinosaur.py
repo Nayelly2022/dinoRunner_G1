@@ -1,5 +1,5 @@
 import pygame
-from dino_runner.utils.constants import RUNNING,RUNNING_SHIELD ,DUCKING, DUCKING_SHIELD,JUMPING,SHIELD_TYPE, DEFAULT_TYPE,JUMPING_SHIELD
+from dino_runner.utils.constants import RUNNING,RUNNING_SHIELD ,DUCKING, DUCKING_SHIELD,JUMPING,SHIELD_TYPE, DEFAULT_TYPE,JUMPING_SHIELD,JUMP_SOUND
 from pygame.sprite import Sprite
 
 RUN_IMG = {DEFAULT_TYPE: RUNNING, SHIELD_TYPE: RUNNING_SHIELD}
@@ -50,6 +50,8 @@ class Dinosaur():
             self.dino_run = False
             self.dino_duck = False
             self.dino_jump = True
+            JUMP_SOUND.play(0)      
+
         
         elif not self.dino_jump:
             self.dino_run = True
